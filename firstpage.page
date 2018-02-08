@@ -1,0 +1,148 @@
+<apex:page standardController="Request_Details__c" extensions="WrapperClass" showHeader="false" sidebar="false"  id="page">
+<style type="text/css">
+#wrap{
+width:1300px;
+}
+.left{
+width:600px;
+
+float:left;
+}
+.right{
+width:600px;
+
+float:right;
+}
+</style>
+<apex:form id="frm">
+
+<div class="left">
+<apex:pageBlock title="Source" id="pblck">
+<apex:pageBlocksection id="pbSectn">
+<apex:inputField id="textfield1" value="{!Request_Details__c.SDFC_login_URL_source__c}"/><br/>
+<apex:inputField id="textfield2" value="{!Request_Details__c.User_ID_source__c}"/><br/>
+<apex:inputSecret id="textfield3" value="{!Request_Details__c.Password_source__c}"/><br/>
+</apex:pageBlocksection>
+</apex:pageBlock>
+</div>
+
+<div class="right">
+<apex:pageBlock title="Destination" id="pblckk">
+<apex:pageBlocksection id="pbSectnn">
+<apex:inputField id="textfield4" value="{!Request_Details__c.SDFC_login_URL_target__c}"/><br/>
+<apex:inputField id="textfield5" value="{!Request_Details__c.User_ID_target__c}"/><br/>
+<apex:inputSecret id="textfield6" value="{!Request_Details__c.Password_target__c}"/><br/>
+</apex:pageBlocksection>
+</apex:pageBlock>
+</div>
+<apex:pageBlock >
+<center>
+ <apex:commandButton value="Prepare" action="{!rendersec}" />
+<apex:commandButton value="Reset" onclick="clearValue()"/>
+</center>
+</apex:pageBlock>
+
+<apex:pageBlock title="Configuration" rendered="{!s}">
+    <apex:pageBlockSection > 
+<apex:pageBlockTable value="{!Object}" var="c" >
+<apex:column >
+<apex:inputCheckbox value="{!c.selected}"/>
+</apex:column>
+<apex:column value="{!c.Obj2.Name}" />
+</apex:pageBlockTable>
+ </apex:pageBlockSection>
+ <apex:pageBlock >
+ <center>
+<apex:commandButton value="Configure" action="{!processSelected}" />
+</center>
+</apex:pageBlock>
+ </apex:pageBlock>
+ 
+<apex:pageBlock title="Filter Details" id="test" rendered="{!s}">
+   <!--<apex:outputText value="{!value }"/>-->
+    <apex:pageBlockTable value="{!selectedObject}" var="o" >
+        <apex:column value="{!o.Name}" />
+        <apex:column ><apex:facet name="header">Filter Clause</apex:facet>
+<apex:inputtextarea />
+</apex:column>
+    </apex:pageBlockTable>
+</apex:pageBlock>
+</apex:form>
+
+<script>
+    function clearValue()
+    {
+    document.getElementById('{!$Component.page:frm:pblck:pbSectn:textfield1}').value = '';
+    document.getElementById('{!$Component.page:frm:pblck:pbSectn:textfield2}').value = '';
+    document.getElementById('{!$Component.page:frm:pblck:pbSectn:textfield3}').value = '';
+   document.getElementById('{!$Component.page:frm:pblckk:pbSectnn:textfield4}').value = '';
+   document.getElementById('{!$Component.page:frm:pblckk:pbSectnn:textfield5}').value = '';
+   document.getElementById('{!$Component.page:frm:pblckk:pbSectnn:textfield6}').value = '';
+
+    alert();
+    return false;
+    }
+    </script>
+</apex:page>
+
+<!--
+<apex:pageBlock title="Configuration">
+<apex:pageBlocksection >
+<apex:selectcheckboxes layout="pageDirection">
+           <apex:selectOptions value="{!Lists}"/> <br/>
+       </apex:selectCheckboxes>
+       </apex:pageBlocksection>
+       </apex:pageBlock>
+</apex:form>
+</apex:page>
+
+<apex:page standardController="Opportunity">
+<apex:form >
+<apex:pageBlock title="Source">
+
+<apex:pageBlockSection >
+<apex:inputField value="{!Opportunity.Name}"/>
+
+<apex:commandbutton value="reset" onclick="reset();return false;"/>
+</apex:pageBlockSection>
+<apex:pageBlockSection >
+<apex:inputField value="{!Opportunity.Amount}"/><br/>
+
+ <apex:commandButton value="Reset" onclick="this.form.reset();return false;"/>
+</apex:pageBlocksection>
+</apex:pageBlock>
+</apex:form>
+</apex:page>
+<apex:page controller="tttCon" >
+ <apex:form >
+  <apex:inputText > </apex:inputText><br/>
+    <apex:inputText > </apex:inputText>
+   <apex:commandbutton value="clear values" onclick="cleartext();return false;"/>
+  </apex:form>
+</apex:page>
+
+<apex:page controller="Checkbox">
+   <apex:form >
+       <apex:outputLabel > Select This </apex:outputLabel>
+      <apex:selectcheckboxes layout="pageDirection">
+           <apex:selectOptions value="{!Lists}"/> <br/>
+       </apex:selectCheckboxes>
+   </apex:form>
+</apex:page>
+<center>
+<apex:commandButton action="{!save}" value="Configure" id="b3"/>
+</center>
+<apex:pageBlock title="Filter Details">
+<apex:pageBlocksection >
+<apex:inputText value="{!Opportunity.Name}" id="Obj1"/><br/>
+<apex:inputText value="{!Opportunity.Name}" id="Obj2"/><br/>
+<apex:inputText value="{!Opportunity.Name}" id="Obj3"/><br/>
+<apex:inputText value="{!Opportunity.Name}" id="Obj4"/><br/>
+</apex:pageBlocksection>
+</apex:pageBlock>
+<center>
+<apex:commandButton action="{!save}" value="Submit Request" id="b4"/>
+<apex:commandButton action="{!save}" value="Reset Configuration" id="b5"/>
+</center>
+</apex:form>
+</apex:page>-->
