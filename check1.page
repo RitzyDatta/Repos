@@ -1,0 +1,32 @@
+<apex:page controller="WrapperClass">
+<apex:form >
+
+<apex:pageBlock >
+  <apex:pageBlockButtons >
+            <apex:commandButton value="TAB VIEW" action="{!rendersec}"  />
+            <apex:commandButton value="Process Selected" action="{!processSelected}" rerender="test"/>
+    </apex:pageBlockButtons>
+    
+<apex:pageBlockSection rendered="{!s}"> 
+ 
+<apex:pageBlockTable value="{!Object}" var="c" >
+<apex:column >
+<apex:inputCheckbox value="{!c.selected}"/>
+</apex:column>
+<apex:column value="{!c.Obj2.Name}" />
+</apex:pageBlockTable>
+ </apex:pageBlockSection>
+        
+</apex:pageBlock>
+
+
+<apex:pageBlock id="test">
+    Total No of Selected Records :<apex:outputText value="{!value }"/>
+    <apex:pageBlockTable value="{!selectedObject}" var="o" >
+        <apex:column value="{!o.Name}" />
+    </apex:pageBlockTable>
+</apex:pageBlock>
+
+
+</apex:form>
+</apex:page>
