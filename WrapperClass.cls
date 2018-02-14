@@ -204,7 +204,8 @@ public class WrapperClass{
      public void reset1(){
           selectedObject = new List<Object_list__c>();
           s1=false;
-          
+          inputText=null;
+          queries=new list<string>();
          
     }
 
