@@ -178,7 +178,7 @@ public class WrapperClass{
            
           Filter1__c f= new Filter1__c();
           f.Name = s.name;
-          f.Requset_Name__c = req1.name;
+          f.Requset_Name__c = req1.ID;
           f.Queries__c = queries[i];
            insert f;
            i++;
@@ -193,4 +193,20 @@ public class WrapperClass{
            else
                system.debug('not');
           } 
+          
+//############################################ DAY 5 #####################################
+
+
+    public void reset(){
+         req1 = new Request_Details__c ();
+    }
+
+     public void reset1(){
+          selectedObject = new List<Object_list__c>();
+          s1=false;
+          
+         
+    }
+
+
 }
