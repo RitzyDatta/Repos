@@ -46,7 +46,7 @@ float:right;
     <apex:pageBlockTable value="{!fil1}" var="o" >
         <apex:column value="{!o.Name}" />
         <apex:column id="pc3"><apex:facet name="header">Filter Clause</apex:facet>
-<apex:outputfield value="{!o.Filter_clause__c}"/>
+<apex:outputfield value="{!o.Queries__c}"/>
 </apex:column>
  
     </apex:pageBlockTable>
