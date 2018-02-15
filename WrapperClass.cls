@@ -24,29 +24,21 @@ public class WrapperClass{
        s1=false;
        
        req1 = new Request_Details__c ();    //##################################### DAY4
-      // req2 = new Request_Details__c (); 
-       
-    }
-    
-    
+       req1.ID=null;
+   }
     
     
     public void rendersec()
     {    
-        s = true;
-       
-        
-        }
-    
+        s = true;}
+
     
     public list<Object_list__c> getObj3()
     {
-        return Obj3;
-    
-    }
+        return Obj3;}
     
     
-    public list<SelectOption> getLists()
+    public list<SelectOption> getLists()    // CONFIGURATION
     {
         list<SelectOption> Obj1= new list<SelectOption>();
         
@@ -59,6 +51,7 @@ public class WrapperClass{
     
     
     //#########################################  DAY 2  ############################################################
+// FILTER DETAILS->
 
     public class oObject {
         public Object_List__c obj2 {get; set;}
@@ -113,26 +106,13 @@ public class WrapperClass{
     
 //########################## DAY 3 ################################################################
 
-
-    
-    
-    public pagereference cclear()
-    {
-       selectedObject = new List<Object_list__c>();
-
-       s = true;
-       return null;
-   
-    }
         
     
-    //########################## DAY 4 ################################################################
+//########################## DAY 4 ################################################################
     
     
  list<string> queries=new list<string>();
- 
- 
- // public String inputText; 
+  
  
    public String inputText {
          get { return null;}
@@ -141,24 +121,10 @@ public class WrapperClass{
         queries.add(inputText);
         }
         }
- 
- 
- 
- /* public String getinputText(){return null;}
 
-    public void setinputText()
-    {
-        inputText = value;
-        queries.add(inputText);
-    }
-
-
-    public void addque(String b){   // not
-       queries.add(b);
-        }  */
     
 
-     public void save1(){
+     public pagereference save1(){
    
        if(req1 != null){
           i=0;
@@ -185,6 +151,7 @@ public class WrapperClass{
 
            else
                system.debug('not');
+           return page.secondpage;
           } 
           
 //############################################ DAY 5 #####################################
@@ -206,7 +173,6 @@ public class WrapperClass{
 //############################################ DAY 6 #####################################
 //############################################ SECOND PAGE #####################################
 
-
   public Request_Details__c req2{
    get{
    
@@ -214,24 +180,18 @@ public class WrapperClass{
        req2=req1.clone();
        return req2;}
        
-   set{
-       
+   set{}
    }
-   }
-   
-   
+
    public Filter1__c[] fil1{
    get{
    
    fil1 = new list<Filter1__c>();
-   fil1 = [ select Name, queries__c from  Filter1__c where Requset_Name__c= :req1.ID];
+   fil1 = [ select Name, queries__c from  Filter1__c where Requset_Name__c= :req2.ID];
    return fil1;}
    
-   
-   set{
-       
-   }
-   
+   set{}
+
    }
 
 }
