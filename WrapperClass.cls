@@ -4,16 +4,10 @@ public class WrapperClass{
     public List<Object_list__c> selectedObject{get;set;}    
    // public Integer value {get;set;}    //HERE
     list<Object_List__c> Obj3=[  SELECT Name FROM Object_List__c];    //HERE
-    
-   // public String inputText;  //##################################### DAY4
-    
-    
-    
-    
+     
     Integer i,j;
     
      public Request_Details__c req1{get;set;}   //##################################### DAY4
-    // public Filter1__c fil1{get;set;}    //##################################### DAY4
      public List<Filter1__c> fil2{get;set;} 
     
     
@@ -30,8 +24,8 @@ public class WrapperClass{
        s1=false;
        
        req1 = new Request_Details__c ();    //##################################### DAY4
-       req2 = new Request_Details__c (); 
-       //fil1 = new List<Filter1__c>();    //##################################### DAY4
+      // req2 = new Request_Details__c (); 
+       
     }
     
     
@@ -213,7 +207,31 @@ public class WrapperClass{
 //############################################ SECOND PAGE #####################################
 
 
-   public Request_Details__c req2= [ select SDFC_login_URL_source__c, SDFC_login_URL_target__c, User_ID_source__c, User_ID_target__c,Password_source__c,Password_target__c from Request_Details__c where ID = :req1.ID ];
-   public Filter1__c fil1 = [ select Name, Queries__c from  Filter1__c where Requset_Name__c= :req1.ID];
+  public Request_Details__c req2{
+   get{
+   
+      req2 = new Request_Details__c (); 
+       req2=req1.clone();
+       return req2;}
+       
+   set{
+       
+   }
+   }
+   
+   
+   public Filter1__c[] fil1{
+   get{
+   
+   fil1 = new list<Filter1__c>();
+   fil1 = [ select Name, queries__c from  Filter1__c where Requset_Name__c= :req1.ID];
+   return fil1;}
+   
+   
+   set{
+       
+   }
+   
+   }
 
 }
