@@ -13,8 +13,7 @@ public class WrapperClass{
     Integer i,j;
     
      public Request_Details__c req1{get;set;}   //##################################### DAY4
-     public Request_Details__c req2{get;set;} 
-     public Filter1__c fil1{get;set;}    //##################################### DAY4
+    // public Filter1__c fil1{get;set;}    //##################################### DAY4
      public List<Filter1__c> fil2{get;set;} 
     
     
@@ -206,8 +205,15 @@ public class WrapperClass{
           s1=false;
           inputText=null;
           queries=new list<string>();
-         
-    }
+          objectlist=null;
+         }
 
+
+//############################################ DAY 6 #####################################
+//############################################ SECOND PAGE #####################################
+
+
+   public Request_Details__c req2= [ select SDFC_login_URL_source__c, SDFC_login_URL_target__c, User_ID_source__c, User_ID_target__c,Password_source__c,Password_target__c from Request_Details__c where ID = :req1.ID ];
+   public Filter1__c fil1 = [ select Name, Queries__c from  Filter1__c where Requset_Name__c= :req1.ID];
 
 }
