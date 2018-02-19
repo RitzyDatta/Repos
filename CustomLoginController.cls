@@ -4,9 +4,11 @@ public class CustomLoginController {
     public String username { get; set; }
     
     public boolean error {get; set;}
+    public boolean error1 {get; set;}
     
     public CustomLoginController(){
         error=false;
+        error1=false;
     }
     
     public PageReference LogUser() {
@@ -28,7 +30,8 @@ public class CustomLoginController {
                         ApexPages.addMessage(myMsg);
                            system.debug('MyMsg:'+myMsg); */
                        
-                        error=true;
+                        error1=true;
+                        error=false;
                     }
                 }
             }
@@ -38,7 +41,8 @@ public class CustomLoginController {
                 ApexPages.addMessage(myMsg);
                 system.debug('MyMsg:'+myMsg);  */
                 
-                error=true;
+                error1=false;
+               error=true;
             }
         }
         return null;
