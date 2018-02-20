@@ -1,4 +1,4 @@
-<apex:page sidebar="false" controller="CustomLoginController" showheader="false" standardStylesheets="false">
+<apex:page sidebar="false" controller="WrapperClass"  showheader="false" standardStylesheets="false">
 <apex:form >
 
 <style>

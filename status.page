@@ -1,0 +1,21 @@
+<apex:page controller="WrapperClass" showHeader="false" sidebar="false"  id="page">
+  <apex:form >
+  <apex:variable var="rowNum" value="{!0}"/>
+  <apex:pageBlock title=" Request Status">
+  <apex:pageblockTable value="{!req3}" var="o">
+  <apex:column id="s1">
+  
+  <apex:facet name="header">Serial No</apex:facet>
+   <apex:variable var="rowNum" value="{!rowNum + 1}"/>
+     {!rowNum}
+  </apex:column>
+  <apex:column id="s2" value="{!o.name}">
+  <apex:facet name="header">Request ID</apex:facet>
+  </apex:column>
+  <apex:column id="s3">
+  <apex:facet name="header">Status</apex:facet>
+  </apex:column>
+  </apex:pageblockTable>
+  </apex:pageBlock>
+  </apex:form>
+</apex:page>

@@ -47,6 +47,7 @@ float:right;
 <center>
  <apex:commandButton value="Prepare" action="{!rendersec}" />
 <apex:commandButton value="Reset" action="{!reset}"/>
+<apex:commandButton value="Request Status" action="{!status}"/>
 </center>
 </apex:pageBlock>
 
@@ -64,7 +65,6 @@ float:right;
 <apex:commandButton value="Configure" action="{!processSelected}"  />
 </center>
 </apex:pageBlock>
-
 
  <apex:pageBlock title="Filter Details" rendered="{!s1}" id="pblck3">
 <!--<apex:pageBlockSection rendered="{!s}" id="pblck3" >-->
