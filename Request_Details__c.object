@@ -53,11 +53,11 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
-        <fullName>Object_List__c</fullName>
+        <fullName>Login_Name__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
-        <label>Object List</label>
-        <referenceTo>Object_List__c</referenceTo>
+        <label>Login Name</label>
+        <referenceTo>Login__c</referenceTo>
         <relationshipLabel>Request Details</relationshipLabel>
         <relationshipName>Request_Details</relationshipName>
         <required>false</required>
@@ -69,22 +69,20 @@
         <externalId>false</externalId>
         <label>Password</label>
         <length>80</length>
-        <maskChar>asterisk</maskChar>
-        <maskType>all</maskType>
-        <required>true</required>
+        <required>false</required>
         <trackTrending>false</trackTrending>
-        <type>EncryptedText</type>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Password_target__c</fullName>
         <externalId>false</externalId>
         <label>Password</label>
         <length>80</length>
-        <maskChar>asterisk</maskChar>
-        <maskType>all</maskType>
-        <required>true</required>
+        <required>false</required>
         <trackTrending>false</trackTrending>
-        <type>EncryptedText</type>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Request_ID__c</fullName>
@@ -109,6 +107,17 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <defaultValue>&quot;Pending&quot;</defaultValue>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>User_ID_source__c</fullName>

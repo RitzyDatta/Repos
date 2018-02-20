@@ -9,6 +9,7 @@ public class WrapperClass{
     
      public Request_Details__c req1{get;set;}   //##################################### DAY4
      public List<Filter1__c> fil2{get;set;} 
+     
     
     
     public WrapperClass(apexpages.standardcontroller cont){}
@@ -17,15 +18,85 @@ public class WrapperClass{
     public Boolean displayInputputText{get;set;}
     public boolean s {get; set;}
     public boolean s1 {get; set;}
+     public List<Login__c> UserObj{get;set;} //############################# DAY 7
     
     public WrapperClass()
     {
        s=false;
        s1=false;
        
+       
+       error=false;  //############################# DAY 7
+       error1=false;
        req1 = new Request_Details__c ();    //##################################### DAY4
        req1.ID=null;
+       UserObj = new list<Login__c>(); //########################### DAY7
    }
+    
+    
+    
+//########################################## LOGIN PAGE #################################################
+  //################################################### DAY7 ################################################################################
+    
+    
+   public String password { get; set; }
+   public String username { get; set; }
+   
+   public boolean error {get; set;}
+    public boolean error1 {get; set;}
+   
+   
+   public PageReference LogUser() {
+      
+       
+       if(username != null && username != '')
+       {
+           UserObj = [Select User_name__c,Password__c,Position__c from Login__c where User_name__c =:username];
+           
+           if(UserObj.size()>0)
+           {
+               for(Login__c log : UserObj){
+                   if(password == log.Password__c)
+                   {
+                       if(log.Position__c=='Customer')
+                       {
+                           req3=new list<Request_Details__c>();
+                           req3= [select Request_ID__c,status__c from Request_Details__c where Login_name__c = :UserObj[0].ID];
+                           return Page.firstpage ;
+                           }
+                       else
+                       {
+                           req3=new list<Request_Details__c>();
+                           req3= [select Request_ID__c,status__c from Request_Details__c];
+                           return Page.status;
+                       }
+                       
+                   }
+                   else
+                   {
+                       error1=true;
+                       error=false;
+                   }
+               }
+           }
+           
+           else
+           {
+               error1=false;
+               error=true;
+           }
+      }
+      else
+           {
+               error=true;
+           }
+       return null;
+       }
+
+    
+ //########################################## LOGIN PAGE #################################################  
+ //#################################################################################################   
+    
     
     
     public void rendersec()
@@ -128,7 +199,7 @@ public class WrapperClass{
    
        if(req1 != null){
           i=0;
-              
+         req1.Login_name__c = UserObj[0].ID;   // ################################# DAY 7
        insert req1;
        fil2 = new List<Filter1__c>();
        
@@ -143,10 +214,6 @@ public class WrapperClass{
            i++;
 
            }
-               /* if(fil2 != null){
-                   insert fil2;
-                   } */
-                   
             }
 
            else
@@ -187,11 +254,28 @@ public class WrapperClass{
    get{
    
    fil1 = new list<Filter1__c>();
-   fil1 = [ select Name, queries__c from  Filter1__c where Requset_Name__c= :req2.ID];
+   fil1 = [ select Name, queries__c from  Filter1__c where Requset_Name__c= :req1.ID];
    return fil1;}
    
    set{}
 
    }
+   
+   
+   
+//############################## DAY 7 ###################################################################
+
+public list<Request_Details__c> req3{get;set;}
+
+
+public PageReference status() 
+{
+    
+      return Page.status;
+     }
+    
+   
+
+   
 
 }
