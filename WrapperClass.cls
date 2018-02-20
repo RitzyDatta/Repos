@@ -1,5 +1,8 @@
 public class WrapperClass{
 
+
+//------------------------- VARIABLE DECLARATION --------------------------------------------------------
+
     public List<oObject> objectList {get; set;}        //HERE
     public List<Object_list__c> selectedObject{get;set;}    
    // public Integer value {get;set;}    //HERE
@@ -18,9 +21,20 @@ public class WrapperClass{
     public Boolean displayInputputText{get;set;}
     public boolean s {get; set;}
     public boolean s1 {get; set;}
-     public List<Login__c> UserObj{get;set;} //############################# DAY 7
-    
-    public WrapperClass()
+
+//------------------------------------------ DAY 7 ----------------------------------------------------------
+     public List<Login__c> UserObj{get;set;} 
+     public list<Request_Details__c> req3{get;set;}
+     public String password { get; set; }
+     public String username { get; set; }
+   
+    public boolean error {get; set;}
+    public boolean error1 {get; set;}
+   
+     
+//------------------------- VARIABLE DECLARATION --------------------------------------------------------
+
+    public WrapperClass() //CONSTRUCTOR
     {
        s=false;
        s1=false;
@@ -38,13 +52,7 @@ public class WrapperClass{
 //########################################## LOGIN PAGE #################################################
   //################################################### DAY7 ################################################################################
     
-    
-   public String password { get; set; }
-   public String username { get; set; }
-   
-   public boolean error {get; set;}
-    public boolean error1 {get; set;}
-   
+
    
    public PageReference LogUser() {
       
@@ -264,8 +272,6 @@ public class WrapperClass{
    
    
 //############################## DAY 7 ###################################################################
-
-public list<Request_Details__c> req3{get;set;}
 
 
 public PageReference status() 
