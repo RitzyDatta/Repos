@@ -9,10 +9,10 @@
    <apex:variable var="rowNum" value="{!rowNum + 1}"/>
      {!rowNum}
   </apex:column>
-  <apex:column id="s2" value="{!o.name}">
+  <apex:column id="s2" value="{!o.Request_ID__c}">
   <apex:facet name="header">Request ID</apex:facet>
   </apex:column>
-  <apex:column id="s3">
+  <apex:column id="s3" value="{!o.Status__c}">
   <apex:facet name="header">Status</apex:facet>
   </apex:column>
   </apex:pageblockTable>
