@@ -9,7 +9,12 @@
    <apex:variable var="rowNum" value="{!rowNum + 1}"/>
      {!rowNum}
   </apex:column>
-  <apex:column id="s2" value="{!o.Request_ID__c}">
+  <apex:column id="s2">
+ 
+<apex:commandLink action="{!a}" value="{!o.Request_ID__c}">
+    <apex:param value="{!o.name}" name="vall"/>
+         
+   </apex:commandLink>
   <apex:facet name="header">Request ID</apex:facet>
   </apex:column>
   <apex:column id="s3" value="{!o.Status__c}">
@@ -17,5 +22,7 @@
   </apex:column>
   </apex:pageblockTable>
   </apex:pageBlock>
+  
+
   </apex:form>
 </apex:page>

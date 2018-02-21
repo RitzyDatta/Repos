@@ -1,4 +1,4 @@
-<apex:page controller="WrapperClass" showHeader="false" sidebar="false"  id="page">
+<apex:page controller="WrapperClass" showHeader="false" sidebar="false"  id="page"  >
 <apex:form >
 <style type="text/css">
 
@@ -17,7 +17,7 @@ float:right;
 }
 </style>
 <apex:pageBlock >
-<h1><b><center>Your id:-<apex:outputField value="{!req1.id}"/>has been submitted</center></b></h1><br/><br/>
+<h1><b><center>Your id:-<apex:outputField value="{!req1.id}"/> has been submitted</center></b></h1><br/><br/>
 <h1><b><center>............................DETAILS..........................</center></B></h1>
 </apex:pageBlock>
 <div class="left">
@@ -31,6 +31,7 @@ float:right;
 </apex:pageBlock>
 </div>
 
+
 <div class="right">
 <apex:pageBlock title="Destination">
 <apex:pageBlocksection >
@@ -41,6 +42,13 @@ float:right;
 </apex:pageBlock>
 </div> 
 
+<apex:pageBlock >
+<center>
+<apex:outputLink value="data:text/plain;charset=utf-8;base64,{!FileContents}" html-download="Credential.properties">
+Download Credentials
+ </apex:outputLink>
+ </center>
+</apex:pageBlock>
 
 <apex:pageBlock title="Filter Details">
     <apex:pageBlockTable value="{!fil1}" var="o" >
@@ -53,4 +61,16 @@ float:right;
 </apex:pageBlock> 
 
 </apex:form>
+
+<apex:pageBlock >
+<center>
+<apex:outputLink value="data:text/plain;charset=utf-8;base64,{!FileContents1}" html-download="Filter.txt">
+Download FilterClause
+ </apex:outputLink>
+</center>
+</apex:pageBlock>
+
+<script>
+
+</script>
     </apex:page>
