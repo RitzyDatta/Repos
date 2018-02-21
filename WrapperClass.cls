@@ -307,10 +307,12 @@ public String getFileContents() {
 
     description1='';
     i=0;
-    for(Object_List__c s : selectedObject){
-        description1+='"'+s.name+'",'+ +'"'+queries[i]+'",'+'"skipProperty/skip_for_'+s.name+'.properties"'+'\r\n';
+    
+    for(Filter1__c s : fil1){
+        description1+='"'+s.name+'",'+ +'"'+s.queries__c+'",'+'"skipProperty/skip_for_'+s.name+'.properties"'+'\r\n';
         i++; 
     }
+    
     
     return EncodingUtil.base64Encode(Blob.valueOf(description1));
 }
