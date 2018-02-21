@@ -69,13 +69,13 @@ public class WrapperClass{
                        if(log.Position__c=='Customer')
                        {
                            req3=new list<Request_Details__c>();
-                           req3= [select Request_ID__c,status__c from Request_Details__c where Login_name__c = :UserObj[0].ID];
+                           req3= [select name,ID,Request_ID__c,status__c from Request_Details__c where Login_name__c = :UserObj[0].ID];
                            return Page.firstpage ;
                            }
                        else
                        {
                            req3=new list<Request_Details__c>();
-                           req3= [select Request_ID__c,status__c from Request_Details__c];
+                           req3= [select name,ID,Request_ID__c,status__c from Request_Details__c];
                            return Page.status;
                        }
                        
@@ -281,7 +281,47 @@ public PageReference status()
      }
     
    
+//######################################## DAY 8 #######################################################
+//---------------- DOWNLOAD LINK --------------------------------------------------------
 
+
+public string description{get;set;}
+public string description1{get;set;}
+public string val{get;set;}
+
+public String getFileContents() {
+
+    description= 'sf.source.serverurl=' +req2.SDFC_login_URL_source__c  + '\r\n';
+    description= description+ 'sf.source.username='+ req2.User_ID_source__c+ '\r\n';
+    description= description + 'sf.source.password='+req2.Password_source__c+ '\r\n\r\n';
+    
+    description= description + 'sf.target.serverurl=' +req2.SDFC_login_URL_target__c+ '\r\n';
+    description= description + 'sf.target.username='+req2.User_ID_target__c+ '\r\n';
+    description= description + 'sf.target.password='+req2.Password_target__c+ '\r\n';
+    
+    return EncodingUtil.base64Encode(Blob.valueOf(description));
+}
    
+   
+   public String getFileContents1() {
+
+    description1='';
+    i=0;
+    for(Object_List__c s : selectedObject){
+        description1+='"'+s.name+'",'+ +'"'+queries[i]+'",'+'"skipProperty/skip_for_'+s.name+'.properties"'+'\r\n';
+        i++; 
+    }
+    
+    return EncodingUtil.base64Encode(Blob.valueOf(description1));
+}
+
+//------------------------- DETAILS FROM LIST OF LINKS ----------------------------------------------------------
+
+public pagereference a(){
+   req1 = new Request_Details__c ();
+   val=ApexPages.CurrentPage().getParameters().get('vall');
+   req1= [select SDFC_login_URL_source__c,User_ID_source__c,Password_source__c,SDFC_login_URL_target__c,User_ID_target__c,Password_target__c from Request_Details__c where name= :val];
+   return page.secondpage;
+}
 
 }
