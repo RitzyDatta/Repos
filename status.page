@@ -2,6 +2,10 @@
   <apex:form >
   <apex:variable var="rowNum" value="{!0}"/>
   <apex:pageBlock title=" Request Status">
+  
+  <apex:selectList size="1">
+          <apex:selectOptions value="{!dynamiclist}"></apex:selectOptions>
+      </apex:selectList>
   <apex:pageblockTable value="{!req3}" var="o">
   <apex:column id="s1">
   
@@ -19,6 +23,9 @@
   </apex:column>
   <apex:column id="s3" value="{!o.Status__c}">
   <apex:facet name="header">Status</apex:facet>
+  </apex:column>
+  <apex:column id="s4">
+  <apex:facet name="header">Date</apex:facet>
   </apex:column>
   </apex:pageblockTable>
   </apex:pageBlock>

@@ -47,7 +47,7 @@ float:right;
 <center>
  <apex:commandButton value="Prepare" action="{!rendersec}" />
 <apex:commandButton value="Reset" action="{!reset}"/>
-<apex:commandButton value="Request Status" action="{!status}"/>
+<!--<apex:commandButton value="Request Status" action="{!status}"/>-->
 </center>
 </apex:pageBlock>
 
