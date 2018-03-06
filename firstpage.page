@@ -1,8 +1,5 @@
-<apex:page controller="WrapperClass" showHeader="false" sidebar="false"  id="page">
-
-
+<apex:page controller="WrapperClass" standardStylesheets="true" showHeader="false" sidebar="false"  id="page">
 <style type="text/css">
-
 #wrap{
 width:1300px;
 }
@@ -16,76 +13,152 @@ width:600px;
 
 float:right;
 }
-</style>
-<apex:form id="frm">
-<!--<apex:actionFunction name="saveActionFunc" action="{!Save}" oncomplete="redirectPage()" />-->
 
-<div class="left">
+.errorMsg{
+
+    font-size:0.8 em;
+
+    color:red;
+
+}
+
+</style>
+
+<apex:form id="frm">
+<apex:pageBlock id="cre">
+<div class="left" >
 <apex:pageBlock title="Source" id="pblck">
-<apex:pageBlocksection id="pbSectn">
-<apex:inputfield id="textfield1" value="{!req1.SDFC_login_URL_source__c}" /><br/>
-<apex:inputField id="textfield2" value="{!req1.User_ID_source__c}"/><br/>
-<apex:inputsecret id="textfield3" value="{!req1.Password_source__c}" redisplay="true"/><br/>
-<apex:inputfield id="textfield7" value="{!req1.Profile__c}" /><br/>
-</apex:pageBlocksection>
-</apex:pageBlock>
+
+    <apex:pageblockSection >
+        <apex:outputLabel value="SFDC Login url"/>
+        <apex:inputText value="{!loginurl}"/>
+        
+        <apex:outputLabel value="UserName"/>
+        <apex:inputText value="{!UserName}"/>
+        
+        <apex:outputLabel value="Password"/>
+        <apex:inputsecret value="{!Password}" redisplay="true"/>
+        
+        <apex:outputLabel value="Security Token"/>
+        <apex:inputsecret value="{!SecurityToken}" redisplay="true"/>  
+        
+        <apex:outputLabel value="Consumer key"/>
+        <apex:inputText value="{!Conkey}"/> 
+        
+        <apex:outputLabel value="Consumer Secret"/>
+        <apex:inputsecret value="{!consecret}" redisplay="true"/>  
+        
+        <!--
+        <apex:outputLabel value="Domain"/>
+        <apex:selectList value="{!selectedDomain}" multiselect="false" size="1">
+                <apex:selectOptions value="{!DomainName}"/>
+        </apex:selectList>
+         -->
+    
+    </apex:pageblockSection>
+   </apex:pageBlock>
 </div>
 
-
-<div class="right">
+<div class="right" >
 <apex:pageBlock title="Destination" id="pblckk">
-<apex:pageBlocksection id="pbSectnn">
-<apex:inputField id="textfield4" value="{!req1.SDFC_login_URL_target__c}"/><br/>
-<apex:inputField id="textfield5" value="{!req1.User_ID_target__c}"/><br/>
-<apex:inputsecret id="textfield6" value="{!req1.Password_target__c}" redisplay="true"/><br/>
-</apex:pageBlocksection>
+
+    <apex:pageblockSection >
+        <apex:outputLabel value="SFDC Login url"/>
+        <apex:inputText value="{!loginurl1}"/>
+        
+        <apex:outputLabel value="UserName"/>
+        <apex:inputText value="{!UserName1}"/>
+        
+        <apex:outputLabel value="Password"/>
+        <apex:inputsecret value="{!Password1}"/>
+        
+        <apex:outputLabel value="Security Token"/>
+        <apex:inputsecret value="{!SecurityToken1}"/>  
+        
+        <apex:outputLabel value="Consumer key"/>
+        <apex:inputText value="{!Conkey1}"/>
+        
+        <apex:outputLabel value="Consumer Secret"/>
+        <apex:inputsecret value="{!consecret1}"/>  
+          
+    
+    </apex:pageblockSection>
+   </apex:pageBlock>
+</div>
 </apex:pageBlock>
-</div> 
 
 
-<apex:pageBlock > 
+
+
+
+<apex:pageBlock >
 <center>
- <apex:commandButton value="Prepare" action="{!rendersec}" />
-<apex:commandButton value="Reset" action="{!reset}"/>
-<!--<apex:commandButton value="Request Status" action="{!status}"/>-->
+    
+    <apex:commandButton value="Fetch" action="{!doSoqlQuery}" status="waitStatus"/> 
+    <apex:actionStatus startText="Fetching..." stopText="" id="waitStatus" />
+    <apex:commandButton value="Reset" action="{!reset}"/>
+   
 </center>
 </apex:pageBlock>
 
-<apex:pageBlock title="Configuration" rendered="{!s}" id="pblck2">
-  <apex:pageBlockSection id="pbsctn2" > 
-<apex:pageBlockTable value="{!Object}" var="c" id="pt2">
-<apex:column id="pc2">
-<apex:inputCheckbox value="{!c.selected}" id="pck2"/>
-</apex:column>
-<apex:column value="{!c.Obj2.Name}" />
-</apex:pageBlockTable>
- </apex:pageBlockSection>
 
- <center>
-<apex:commandButton value="Configure" action="{!processSelected}"  />
-</center>
-</apex:pageBlock>
+<apex:outputPanel id="wrapper">
+<center>
+        <div class="errorMsg" style="display:{!displayError}"> {!errMsg} </div>
+        </center>
+        </apex:outputPanel>
 
- <apex:pageBlock title="Filter Details" rendered="{!s1}" id="pblck3">
-<!--<apex:pageBlockSection rendered="{!s}" id="pblck3" >-->
-   <!--<apex:outputText value="{!value }"/>--> 
-    <apex:pageBlockTable value="{!selectedObject}" var="o" id="pt3" >
-        <apex:column value="{!o.Name}" />
-        <apex:column id="pc3"><apex:facet name="header">Filter Clause</apex:facet>
-<apex:inputtextarea value="{!inputText}"/>
-</apex:column>
- 
-    </apex:pageBlockTable>
-   <!-- </apex:pageBlockSection> -->
+<apex:pageBlock rendered="{!s}" > 
+                                                       <!-- rendered="{!s}"> -->
+   <apex:pageblockSection id="acctDetails">
+    
+        
+        
+        <apex:pageBlock title="Configuration" rendered="true">  
+        
+        
+            <apex:pageBlockTable value="{!Object}" var="c" id="accTable">
+            
+            <apex:column id="pc2">
+            <apex:inputCheckbox value="{!c.selected}" id="pck2"/>
+            </apex:column>
+            
+            
+            <apex:column >
+                <apex:facet name="header">class Name</apex:facet>
+                <apex:outputText value="{!c.Obj2}"/>
+            </apex:column>  
+            
+            
+            </apex:pageBlockTable>
+            
+            
+        </apex:pageBlock> 
+    </apex:pageblockSection>
+    
     
     <center>
-<apex:commandButton value="Submit Request" id="b4" action="{!save1}" />
-
-<apex:commandButton value="Reset Configuration" action="{!reset1}"/>
-</center>
-
-</apex:pageBlock>
-
+    <apex:commandButton value="Configure" action="{!processSelected}"  />
+    </center>
+    
+</apex:pageBlock> 
+    
+   <apex:pageBlock title="Filter Details" rendered="{!s1}" id="pblck3">                                              <!-- rendered="{!s1}" id="pblck3">  -->
+    
+    <apex:pageBlockTable value="{!selectedObject}" var="o" id="pt3" >
+    <apex:column value="{!o}" />
+    <apex:column id="pc3"><apex:facet name="header">Filter Clause</apex:facet>
+    <apex:inputtextarea value="{!inputText}"/>
+    </apex:column>
+    </apex:pageblockTable>
+    
+    
+    <center>
+        <apex:commandButton value="Submit Request" id="b4" action="{!save1}" />
+        
+        <apex:commandButton value="Reset Configuration" action="{!reset1}"/>
+    </center>
+   </apex:pageBlock>
 
 
 </apex:form>
