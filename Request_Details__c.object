@@ -53,6 +53,46 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
+        <fullName>Consumer_Secret_source__c</fullName>
+        <externalId>false</externalId>
+        <label>Consumer Secret</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consumer_Secret_target__c</fullName>
+        <externalId>false</externalId>
+        <label>Consumer Secret</label>
+        <length>80</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consumer_key_source__c</fullName>
+        <externalId>false</externalId>
+        <label>Consumer key</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Consumer_key_target__c</fullName>
+        <externalId>false</externalId>
+        <label>Consumer key</label>
+        <length>200</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Login_Name__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <externalId>false</externalId>
@@ -107,6 +147,26 @@
         <required>false</required>
         <trackTrending>false</trackTrending>
         <type>Url</type>
+    </fields>
+    <fields>
+        <fullName>Security_Token_Source__c</fullName>
+        <externalId>false</externalId>
+        <label>Security Token</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Security_Token_Target__c</fullName>
+        <externalId>false</externalId>
+        <label>Security Token</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Status__c</fullName>
