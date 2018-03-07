@@ -103,9 +103,9 @@ input[type=submit]:hover {
     <div id="box">
         <br/>
             <label for="username"><b>Username</b></label>
-            <apex:inputText id="username" value="{!username}" html-placeholder="Username"/><br/><br/><br/>
+            <apex:inputText id="username" value="{!username123}" html-placeholder="Username"/><br/><br/><br/>
             <label for="password"><b>Password</b></label>
-             <apex:inputSecret id="password" value="{!password}" html-placeholder="Password"/>
+             <apex:inputSecret id="password" value="{!password123}" html-placeholder="Password"/>
             <div id="log">  
                 <apex:commandbutton value="Login" action="{!LogUser}"/>
             </div>
