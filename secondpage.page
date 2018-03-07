@@ -68,9 +68,13 @@ Download Credentials
     <apex:pageBlockTable value="{!fil1}" var="o" >
         <apex:column value="{!o.Name}" />
         <apex:column id="pc3"><apex:facet name="header">Filter Clause</apex:facet>
-<apex:outputfield value="{!o.Queries__c}"/>
-</apex:column>
+            <apex:outputfield value="{!o.Queries__c}"/>
+        </apex:column>
+         <apex:column id="pc4"><apex:facet name="header">Skip Text</apex:facet>
+            <apex:outputfield value="{!o.Skip_Text__c}"/>
+        </apex:column>
  
+         
     </apex:pageBlockTable>
 </apex:pageBlock> 
 

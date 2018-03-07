@@ -61,6 +61,9 @@ public String loginurl{get;set;}
    
     public boolean error {get; set;}
     public boolean error1 {get; set;}
+    //public string SkipText{get;set;}
+    //public List<string> SkipTextArray{get;set;}
+
    
  
  
@@ -357,7 +360,7 @@ public string orderBy{get;set;}
     
     
  list<string> queries=new list<string>();
-  
+ List<string> SkipTextArray=new list<string>();
  
    public String inputText {
          get { return null;}
@@ -398,6 +401,7 @@ public string orderBy{get;set;}
           f.Name = s;
           f.Requset_Name__c = req1.ID;
           f.Queries__c = queries[i];
+          f.Skip_Text__c=SkipTextArray[i];
            insert f;
            i++;
 
@@ -434,6 +438,7 @@ public string orderBy{get;set;}
           inputText=null;
           queries=new list<string>();
           objectlist=null;
+          SkipTextArray=new list<string>();
          }
 
 
@@ -455,7 +460,7 @@ public string orderBy{get;set;}
    if (req1.ID != null)
    {
    fil1 = new list<Filter1__c>();
-   fil1 = [ select Name, queries__c from  Filter1__c where Requset_Name__c= :req1.ID];
+   fil1 = [ select Name, queries__c, Skip_Text__c from  Filter1__c where Requset_Name__c= :req1.ID];
    return fil1;}
    else
        return null;
@@ -488,11 +493,16 @@ public String getFileContents() {
 
     description= 'sf.source.serverurl=' +req2.SDFC_login_URL_source__c  + '\r\n';
     description= description+ 'sf.source.username='+ req2.User_ID_source__c+ '\r\n';
-    description= description + 'sf.source.password='+req2.Password_source__c+ '\r\n\r\n';
+    description= description + 'sf.source.password='+req2.Password_source__c+ '\r\n';
+    description= description + 'sf.source.clientid='+req2.Consumer_key_source__c+ '\r\n';
+    description= description + 'sf.source.clientsecret='+req2.Consumer_Secret_source__c+ '\r\n\r\n';
+
     
     description= description + 'sf.target.serverurl=' +req2.SDFC_login_URL_target__c+ '\r\n';
     description= description + 'sf.target.username='+req2.User_ID_target__c+ '\r\n';
     description= description + 'sf.target.password='+req2.Password_target__c+ '\r\n';
+    description= description + 'sf.source.clientid='+req2.Consumer_key_target__c+ '\r\n';
+    description= description + 'sf.source.clientsecret='+req2.Consumer_Secret_target__c+ '\r\n\r\n';
     
     return EncodingUtil.base64Encode(Blob.valueOf(description));
 }
@@ -502,10 +512,12 @@ public String getFileContents() {
 
     description1='';
     i=0;
-    
+    if (fil1 !=null)
+    {
     for(Filter1__c s : fil1){
         description1+='"'+s.name+'",'+ +'"'+s.queries__c+'",'+'"skipProperty/skip_for_'+s.name+'.properties"'+'\r\n';
         i++; 
+        }
     }
     
     
@@ -535,6 +547,14 @@ return page.firstpage;
 
 //################################ DAY 9 ##########################################################################
 
+
+   public String SkipText {
+         get { return null;}
+        set { 
+        SkipText = value;
+        SkipTextArray.add(SkipText);
+        }
+        }
 
 
 }

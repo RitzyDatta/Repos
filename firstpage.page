@@ -150,6 +150,10 @@ float:right;
     <apex:column id="pc3"><apex:facet name="header">Filter Clause</apex:facet>
     <apex:inputtextarea value="{!inputText}"/>
     </apex:column>
+    
+    <apex:column id="pc4"><apex:facet name="header">Skip Text</apex:facet>
+    <apex:inputtextarea value="{!SkipText}"/>
+    </apex:column>
     </apex:pageblockTable>
     
     
