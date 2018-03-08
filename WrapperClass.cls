@@ -390,7 +390,7 @@ public string orderBy{get;set;}
        
        if(req1 != null){
           i=0;
-        // req1.Login_name__c = UserObj[0].ID;   // ################################# DAY 7
+         req1.Login_name__c = UserObj[0].ID;   // ################################# DAY 7
        insert req1;
        fil2 = new List<Filter1__c>();
        
@@ -431,6 +431,7 @@ public string orderBy{get;set;}
         SecurityToken1 = '';
         conKey1 = '';
         conSecret1 = '';
+        req1 = new Request_Details__c ();
     }  
      public void reset1(){
           selectedObject = new List<String>();
@@ -515,7 +516,10 @@ public String getFileContents() {
     if (fil1 !=null)
     {
     for(Filter1__c s : fil1){
-        description1+='"'+s.name+'",'+ +'"'+s.queries__c+'",'+'"skipProperty/skip_for_'+s.name+'.properties"'+'\r\n';
+        //description1+='"'+s.name+'",'+ +'"'+s.queries__c+'",'+'"skipProperty/skip_for_'+s.name+'.properties"'+'\r\n';
+        
+        description1+='"'+s.name+'",'+ +'"'+s.queries__c+'",'+'"'+s.Skip_Text__c+s.name+'.properties"'+'\r\n';
+
         i++; 
         }
     }
@@ -529,7 +533,7 @@ public String getFileContents() {
 public pagereference a(){
    req1 = new Request_Details__c ();
    val=ApexPages.CurrentPage().getParameters().get('vall');
-   req1= [select SDFC_login_URL_source__c,User_ID_source__c,Password_source__c,SDFC_login_URL_target__c,User_ID_target__c,Password_target__c from Request_Details__c where name= :val];
+   req1= [select SDFC_login_URL_source__c,User_ID_source__c,Password_source__c,Consumer_key_source__c,Consumer_Secret_source__c,Security_Token_Source__c,SDFC_login_URL_target__c,User_ID_target__c,Password_target__c,Consumer_key_target__c,Consumer_Secret_target__c from Request_Details__c where name= :val];
    return page.secondpage;
 }
 
