@@ -29,11 +29,10 @@
   <apex:column id="s3" value="{!o.Status__c}">
   <apex:facet name="header">Status</apex:facet>
   </apex:column>
-  <!--<apex:column id="s4">
-  <apex:facet name="header">Date</apex:facet>
-  </apex:column>-->
- 
- 
+  <apex:column id="s4" value="{!o.CreatedDate}">
+  <apex:facet name="header">Created Date</apex:facet>
+  </apex:column>
+  
   </apex:datatable> 
 
 

@@ -107,13 +107,13 @@ public string orderBy{get;set;}
                        if(log.Position__c=='Customer')
                        {
                            req3=new list<Request_Details__c>();
-                           req3= [select name,ID,Request_ID__c,status__c from Request_Details__c where Login_name__c = :UserObj[0].ID];
+                           req3= [select name,ID,Request_ID__c,status__c,CreatedDate from Request_Details__c where Login_name__c = :UserObj[0].ID];
                            return Page.command ;
                            }
                        else
                        {
                            req3=new list<Request_Details__c>();
-                           req3= [select name,ID,Request_ID__c,status__c from Request_Details__c];
+                           req3= [select name,ID,Request_ID__c,status__c,CreatedDate from Request_Details__c];
                            return Page.status;
                        }
                        
