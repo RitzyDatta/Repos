@@ -12,8 +12,7 @@ public class WrapperClass{
     
      public Request_Details__c req1{get;set;}   //##################################### DAY4
      public List<Filter1__c> fil2{get;set;} 
-     
-    
+      
     
     public WrapperClass(apexpages.standardcontroller cont){}
     
@@ -63,7 +62,7 @@ public String loginurl{get;set;}
     public boolean error1 {get; set;}
     //public string SkipText{get;set;}
     //public List<string> SkipTextArray{get;set;}
-
+    public boolean displayPopup {get; set;}
    
  
  
@@ -72,6 +71,7 @@ public String loginurl{get;set;}
 
     public WrapperClass() //CONSTRUCTOR
     {
+       displayPopup = false;
        s=false;
        s1=false;
        
@@ -106,9 +106,10 @@ public string orderBy{get;set;}
                    {
                        if(log.Position__c=='Customer')
                        {
+                           displayPopup = true;
                            req3=new list<Request_Details__c>();
                            req3= [select name,ID,Request_ID__c,status__c,CreatedDate from Request_Details__c where Login_name__c = :UserObj[0].ID];
-                           return Page.command ;
+                          // return Page.command ;
                            }
                        else
                        {
@@ -399,7 +400,7 @@ public string orderBy{get;set;}
            
           Filter1__c f= new Filter1__c();
           f.Name = s;
-          f.Requset_Name__c = req1.ID;
+          f.Request_Name__c = req1.ID;
           f.Queries__c = queries[i];
           f.Skip_Text__c=SkipTextArray[i];
            insert f;
@@ -461,7 +462,7 @@ public string orderBy{get;set;}
    if (req1.ID != null)
    {
    fil1 = new list<Filter1__c>();
-   fil1 = [ select Name, queries__c, Skip_Text__c from  Filter1__c where Requset_Name__c= :req1.ID];
+   fil1 = [ select Name, queries__c, Skip_Text__c from  Filter1__c where Request_Name__c= :req1.ID];
    return fil1;}
    else
        return null;
@@ -559,6 +560,13 @@ return page.firstpage;
         SkipTextArray.add(SkipText);
         }
         }
-
+        
+        
+ public void closePopup() {        
+        displayPopup = false;    
+    }     
+    public void showPopup() {        
+        displayPopup = true;    
+    }
 
 }

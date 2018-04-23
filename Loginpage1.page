@@ -26,7 +26,7 @@ padding:16px;
 
 }
 
-#log{
+ #log{
 padding-top: 30px;
 
 }
@@ -68,7 +68,7 @@ input[type=checkbox] {
 }
 input[type=submit] {
 font-weight: bold;
-  background-color:#40acce;
+   background-color:#40acce;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -82,8 +82,31 @@ input[type=submit]:hover {
     opacity: 0.9;
 }
 
-</style>
+.custPopup{
+            background-color: white;
+            border-width: 2px;
+            border-style: solid;
+            z-index: 9999;
+            left: 50%;
+            padding:10px;
+            position: absolute;
+            width: 500px;
+            margin-left: -250px;
+            top:100px;
+        }
+        .popupBackground{
+            background-color:black;
+            opacity: 0.20;
+            filter: alpha(opacity = 20);
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 9998;
+        }
 
+</style>
 <body id='bdy'>
 
 <div id="container">
@@ -108,10 +131,21 @@ input[type=submit]:hover {
              <apex:inputSecret id="password" value="{!password123}" html-placeholder="Password"/>
             <div id="log">  
                 <apex:commandbutton value="Login" action="{!LogUser}"/>
+                
             </div>
          </div>
          
  </div>
+ <apex:outputPanel id="WrapperClass">
+        <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
+            <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
+                 <apex:commandbutton value="Previous Requests" action="{!status}"/>
+                 <apex:commandbutton value="New Request" action="{!b}"/>
+               <center>
+                <apex:commandButton value="Close" action="{!closePopup}" rerender="WrapperClass" />
+                </center>
+            </apex:outputPanel>
+        </apex:outputPanel>
 </body>
 
 </apex:form>
