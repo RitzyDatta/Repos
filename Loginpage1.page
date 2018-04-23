@@ -136,14 +136,16 @@ input[type=submit]:hover {
          </div>
          
  </div>
+ 
  <apex:outputPanel id="WrapperClass">
         <apex:outputPanel styleClass="popupBackground" layout="block" rendered="{!displayPopUp}"/>
             <apex:outputPanel styleClass="custPopup" layout="block" rendered="{!displayPopUp}">
                  <apex:commandbutton value="Previous Requests" action="{!status}"/>
                  <apex:commandbutton value="New Request" action="{!b}"/>
-               <center>
+                 <apex:commandButton value="Close" action="{!closePopup}"/>
+               <!-- <center>
                 <apex:commandButton value="Close" action="{!closePopup}" rerender="WrapperClass" />
-                </center>
+                </center> -->
             </apex:outputPanel>
         </apex:outputPanel>
 </body>
