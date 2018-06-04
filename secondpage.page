@@ -1,68 +1,90 @@
 <apex:page controller="WrapperClass" showHeader="false" sidebar="false"  id="page"  >
-<apex:form >
+    <c:welcome_text text="{!username123}"/>
+
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+        </head>
+    
+
+
 <style type="text/css">
 
+.s1{
+font-size: 1.5vw;
+}
+
 #wrap{
-width:1300px;
+width:1450px;
 }
 .left{
-width:600px;
+width:700px;
 
 float:left;
 }
 .right{
-width:600px;
+width:700px;
 
 float:right;
 }
 </style>
-<apex:pageBlock >
-<h1><b><center>Your id:-<apex:outputField value="{!req1.id}"/> has been submitted</center></b></h1><br/><br/>
-<h1><b><center>............................DETAILS..........................</center></B></h1>
-</apex:pageBlock>
-<div class="left">
-<apex:pageBlock title="Source">
-<apex:pageBlocksection >
-<apex:outputField value="{!req2.SDFC_login_URL_source__c}"/><br/>
-<apex:outputField value="{!req2.User_ID_source__c}"/><br/>
-<apex:outputfield value="{!req2.Password_source__c}"/><br/>
-<apex:outputfield value="{!req2.Security_Token_Source__c}"/><br/>
-<apex:outputField value="{!req2.Consumer_key_source__c}"/><br/>
-
-<apex:outputField value="{!req2.Consumer_Secret_source__c}"/><br/>
 
 
+<div class="container-fluid">
 
-<!--
-<apex:outputField value="{!req2.Profile__c}"/><br/>
--->
-</apex:pageBlocksection>
-</apex:pageBlock>
+<div class="s1" style="padding-bottom:10px">
+
+    <center>
+        Your id:-<apex:outputField value="{!req1.id}"/> has been submitted
+    </center>
+<center>............................DETAILS..........................</center>
 </div>
 
 
-<div class="right">
-<apex:pageBlock title="Destination">
-<apex:pageBlocksection >
-<apex:outputField value="{!req2.SDFC_login_URL_target__c}"/><br/>
-<apex:outputField value="{!req2.User_ID_target__c}"/><br/>
-<apex:outputfield value="{!req2.Password_target__c}"/><br/>
-<apex:outputfield value="{!req2.Security_Token_Target__c}"/><br/>
-<apex:outputField value="{!req2.Consumer_key_target__c}"/><br/>
-<apex:outputField value="{!req2.Consumer_Secret_target__c}"/><br/>
-</apex:pageBlocksection>
-</apex:pageBlock>
-</div> 
+<apex:form >
 
-<apex:pageBlock >
+    <div class="row">
+        <div class="col">
+        <apex:pageBlock title="Source">
+        <apex:pageBlocksection >
+        <apex:outputField value="{!req2.SDFC_login_URL_source__c}"/><br/>
+        <apex:outputField value="{!req2.User_ID_source__c}"/><br/>
+        <apex:outputfield value="{!req2.Password_source__c}"/><br/>
+        <apex:outputfield value="{!req2.Security_Token_Source__c}"/><br/>
+        <apex:outputField value="{!req2.Consumer_key_source__c}"/><br/>
+        
+        <apex:outputField value="{!req2.Consumer_Secret_source__c}"/><br/>
+        
+        </apex:pageBlocksection>
+        </apex:pageBlock>
+        </div>
+    
 
+        <div class="col">
+        <apex:pageBlock title="Destination">
+        <apex:pageBlocksection >
+        <apex:outputField value="{!req2.SDFC_login_URL_target__c}"/><br/>
+        <apex:outputField value="{!req2.User_ID_target__c}"/><br/>
+        <apex:outputfield value="{!req2.Password_target__c}"/><br/>
+        <apex:outputfield value="{!req2.Security_Token_Target__c}"/><br/>
+        <apex:outputField value="{!req2.Consumer_key_target__c}"/><br/>
+        <apex:outputField value="{!req2.Consumer_Secret_target__c}"/><br/>
+        </apex:pageBlocksection>
+        </apex:pageBlock>
+        </div> 
+</div>
+
+
+
+<div style="padding-bottom:20px">
 
 <center>
-<apex:outputLink value="data:text/plain;charset=utf-8;base64,{!FileContents}" html-download="Credential.properties">
-Download Credentials
- </apex:outputLink>
+    <apex:outputLink value="data:text/plain;charset=utf-8;base64,{!FileContents}" html-download="Credential.properties">
+        Download Credentials
+    </apex:outputLink>
  </center> 
-</apex:pageBlock>
+</div>
 
 <apex:pageBlock title="Filter Details">
     <apex:pageBlockTable value="{!fil1}" var="o" >
@@ -80,13 +102,15 @@ Download Credentials
 
 </apex:form>
 
-<apex:pageBlock >
 
+<div>
 <center>
 <apex:outputLink value="data:text/plain;charset=utf-8;base64,{!FileContents1}" html-download="Filter.txt">
 Download FilterClause
  </apex:outputLink>
 </center>
-</apex:pageBlock>
+</div>
 
-    </apex:page>
+
+</div>
+</apex:page>

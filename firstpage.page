@@ -1,97 +1,90 @@
-<apex:page controller="WrapperClass" standardStylesheets="true" showHeader="false" sidebar="false"  id="page">
-<style type="text/css">
-#wrap{
-width:1300px;
-}
-.left{
-width:600px;
-
-float:left;
-}
-.right{
-width:600px;
-
-float:right;
-}
-
-.errorMsg{
-
-    font-size:0.8 em;
-
-    color:red;
-
-}
-
-</style>
-
-<apex:form id="frm">
-<apex:pageBlock id="cre">
-<div class="left" >
-<apex:pageBlock title="Source" id="pblck">
-
-    <apex:pageblockSection >
-        <apex:outputLabel value="SFDC Login url"/>
-        <apex:inputText value="{!loginurl}"/>
-        
-        <apex:outputLabel value="UserName"/>
-        <apex:inputText value="{!UserName}"/>
-        
-        <apex:outputLabel value="Password"/>
-        <apex:inputsecret value="{!Password}" redisplay="true"/>
-        
-        <apex:outputLabel value="Security Token"/>
-        <apex:inputsecret value="{!SecurityToken}" redisplay="true"/>  
-        
-        <apex:outputLabel value="Consumer key"/>
-        <apex:inputText value="{!Conkey}"/> 
-        
-        <apex:outputLabel value="Consumer Secret"/>
-        <apex:inputsecret value="{!consecret}" redisplay="true"/>  
-        
-        <!--
-        <apex:outputLabel value="Domain"/>
-        <apex:selectList value="{!selectedDomain}" multiselect="false" size="1">
-                <apex:selectOptions value="{!DomainName}"/>
-        </apex:selectList>
-         -->
+<apex:page controller="WrapperClass" standardStylesheets="true" SHOWHeader="false" sidebar="false">
+    <c:welcome_text text="{!username123}"/>
     
-    </apex:pageblockSection>
-   </apex:pageBlock>
-</div>
+    <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css"/>
+    </head>
 
-<div class="right" >
-<apex:pageBlock title="Destination" id="pblckk">
+    <style type="text/css">
+        .errorMsg{
+        
+            font-size:0.8 em;
+        
+            color:red;
+            }
+        
+    </style>
 
-    <apex:pageblockSection >
-        <apex:outputLabel value="SFDC Login url"/>
-        <apex:inputText value="{!loginurl1}"/>
-        
-        <apex:outputLabel value="UserName"/>
-        <apex:inputText value="{!UserName1}"/>
-        
-        <apex:outputLabel value="Password"/>
-        <apex:inputsecret value="{!Password1}"/>
-        
-        <apex:outputLabel value="Security Token"/>
-        <apex:inputsecret value="{!SecurityToken1}"/>  
-        
-        <apex:outputLabel value="Consumer key"/>
-        <apex:inputText value="{!Conkey1}"/>
-        
-        <apex:outputLabel value="Consumer Secret"/>
-        <apex:inputsecret value="{!consecret1}"/>  
-          
+
+<!----------------------------------------------------------------------------------- CREDENTIAL ---------------------------------------------------------------------------------->
+
+ <div class="container-fluid">
+ <apex:form id="frm">
+ 
+  <div class="row">
+    <div class="col">
+        <apex:pageBlock title="Source" id="pblck">
     
-    </apex:pageblockSection>
-   </apex:pageBlock>
-</div>
-</apex:pageBlock>
+        <apex:pageblockSection >
+            <apex:outputLabel value="SFDC Login url"/>
+            <apex:inputText value="{!loginurl}"/> 
+            
+            <apex:outputLabel value="UserName"/>
+            <apex:inputText value="{!UserName}"/> 
+            
+            <apex:outputLabel value="Password"/>
+            <apex:inputsecret value="{!Password}" redisplay="true"/> 
+            
+            <apex:outputLabel value="Security Token"/>
+            <apex:inputsecret value="{!SecurityToken}" redisplay="true"/>  
+            
+            <apex:outputLabel value="Consumer key"/>
+            <apex:inputText value="{!Conkey}"/> 
+            
+            <apex:outputLabel value="Consumer Secret"/> 
+            <apex:inputsecret value="{!consecret}" redisplay="true"/> 
+            
+            
+        </apex:pageblockSection> 
+       </apex:pageBlock>
+    
+    </div>
+    
+    
+    <div class="col">
+    
+        <apex:pageBlock title="Destination" id="pblckk">
+    
+            <apex:pageblockSection >
+                <apex:outputLabel value="SFDC Login url"/>
+                <apex:inputText value="{!loginurl1}"/>
+                
+                <apex:outputLabel value="UserName"/>
+                <apex:inputText value="{!UserName1}"/>
+                
+                <apex:outputLabel value="Password"/>
+                <apex:inputsecret value="{!Password1}" redisplay="true"/>
+                
+                <apex:outputLabel value="Security Token"/>
+                <apex:inputsecret value="{!SecurityToken1}" redisplay="true"/>  
+                
+                <apex:outputLabel value="Consumer key"/>
+                <apex:inputText value="{!Conkey1}"/>
+                
+                <apex:outputLabel value="Consumer Secret"/>
+                <apex:inputsecret value="{!consecret1}" redisplay="true"/>  
+                  
+            
+            </apex:pageblockSection> 
+       </apex:pageBlock> 
+    
+    </div>
+  </div>
+<!---------------------------------------------------------------------------- end credential -------------------------------------------------------------------------------------->
 
 
-
-
-
-<apex:pageBlock >
 <center>
     
     <apex:commandButton value="Fetch" action="{!doSoqlQuery}" status="waitStatus"/> 
@@ -99,61 +92,58 @@ float:right;
     <apex:commandButton value="Reset" action="{!reset}"/>
    
 </center>
-</apex:pageBlock>
 
 
 <apex:outputPanel id="wrapper">
-<center>
-        <div class="errorMsg" style="display:{!displayError}"> {!errMsg} </div>
-        </center>
-        </apex:outputPanel>
-
-<apex:pageBlock rendered="{!s}" > 
-                                                       <!-- rendered="{!s}"> -->
-   <apex:pageblockSection id="acctDetails">
-    
-        
-        
-        <apex:pageBlock title="Configuration" rendered="true">  
-        
-        
-            <apex:pageBlockTable value="{!Object}" var="c" id="accTable">
-            
-            <apex:column id="pc2">
-            <apex:inputCheckbox value="{!c.selected}" id="pck2"/>
-            </apex:column>
-            
-            
-            <apex:column >
-                <apex:facet name="header">class Name</apex:facet>
-                <apex:outputText value="{!c.Obj2}"/>
-            </apex:column>  
-            
-            
-            </apex:pageBlockTable>
-            
-            
-        </apex:pageBlock> 
-    </apex:pageblockSection>
-    
-    
     <center>
-    <apex:commandButton value="Configure" action="{!processSelected}"  />
+    <div class="errorMsg" style="display:{!displayError}"> {!errMsg} </div>
     </center>
+</apex:outputPanel>
+
+    
+<!------------------------------------------------------------------------------- CONFIGURATION -------------------------------------------------------------------------------------->
+         
+<apex:pageBlock title="Configuration" rendered="true">  <!-- rendered="{!s}"> -->
+    <apex:pageBlockTable value="{!Object}" var="c" id="accTable">
+    
+    <apex:column id="pc2">
+        <apex:inputCheckbox value="{!c.selected}" id="pck2"/>
+    </apex:column>
+    
+    
+    <apex:column >
+        <apex:facet name="header">class Name</apex:facet>
+        <apex:outputText value="{!c.Obj2}"/>
+    </apex:column>  
+    
+    
+    </apex:pageBlockTable>
+    
     
 </apex:pageBlock> 
-    
-   <apex:pageBlock title="Filter Details" rendered="{!s1}" id="pblck3">                                              <!-- rendered="{!s1}" id="pblck3">  -->
-    
+
+
+
+<center>
+    <apex:commandButton value="Configure" action="{!processSelected}"  />
+</center>
+
+<!------------------------------------------------------------------------------- END CONFIGURATION -------------------------------------------------------------------------------------->
+
+
+<!--------------------------------------------------------------------------------- FILTER ------------------------------------------------------------------------------------------------->
+<apex:pageBlock title="Filter Details"  id="pblck3">                                              <!-- rendered="{!s1}" id="pblck3">  -->  
     <apex:pageBlockTable value="{!selectedObject}" var="o" id="pt3" >
-    <apex:column value="{!o}" />
-    <apex:column id="pc3"><apex:facet name="header">Filter Clause</apex:facet>
-    <apex:inputtextarea value="{!inputText}"/>
-    </apex:column>
     
-    <apex:column id="pc4"><apex:facet name="header">Skip Text</apex:facet>
-    <apex:inputtextarea value="{!SkipText}"/>
-    </apex:column>
+        <apex:column value="{!o}" />
+        
+        <apex:column id="pc3"><apex:facet name="header">Filter Clause</apex:facet>
+        <apex:inputtextarea value="{!inputText}" />
+        </apex:column>
+        
+        <apex:column id="pc4"><apex:facet name="header">Skip Text</apex:facet>
+        <apex:inputtext value="{!SkipText}"/>
+        </apex:column>
     </apex:pageblockTable>
     
     
@@ -162,8 +152,11 @@ float:right;
         
         <apex:commandButton value="Reset Configuration" action="{!reset1}"/>
     </center>
-   </apex:pageBlock>
+</apex:pageBlock>
 
+<!---------------------------------------------------------------------------------END FILTER ------------------------------------------------------------------------------------------------->
 
-</apex:form>
+ </apex:form>
+
+</div>
 </apex:page>
